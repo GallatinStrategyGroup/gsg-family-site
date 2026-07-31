@@ -1852,12 +1852,15 @@
     display: none; align-items: center; justify-content: center;
     padding: 20px;
     opacity: 0; transition: opacity .25s ease;
+    overscroll-behavior: contain;
   }
   .bk-modal-backdrop.open { display: flex; }
   .bk-modal-backdrop.show { opacity: 1; }
   .bk-modal {
     background: #fff; border-radius: 18px;
-    width: 100%; max-width: 720px; max-height: 92vh;
+    width: 100%; max-width: 720px;
+    max-height: 92vh;
+    max-height: min(92dvh, 940px);   /* dvh keeps it inside mobile browser chrome */
     overflow: hidden; display: flex; flex-direction: column;
     box-shadow: 0 24px 80px rgba(0,0,0,.35);
     transform: translateY(14px); transition: transform .25s ease;
@@ -1873,8 +1876,15 @@
     line-height: 1; color: #64748b; padding: 4px 8px;
   }
   .bk-close:hover { color: #0f172a; }
-  .bk-modal-body { overflow-y: auto; -webkit-overflow-scrolling: touch; }
-  .bk-modal-body iframe { width: 100%; border: none; min-height: 640px; display: block; }
+  .bk-modal-body {
+    flex: 1 1 auto; min-height: 0;              /* required for a flex child to scroll */
+    overflow-y: auto; -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;               /* don't chain scroll to the page */
+  }
+  .bk-modal-body iframe {
+    width: 100%; border: none; display: block;
+    height: 640px;   /* starting height; JS resizes it from the calendar's own message */
+  }
   /* Paywall step */
   .bk-paywall { padding: 44px 36px; text-align: center; }
   .bk-paywall h3 { font-size: 1.5rem; margin: 0 0 10px; }
@@ -1923,22 +1933,70 @@
     } catch (e) { return false; }
   }
 
+  /* ── Scroll lock ──
+     `body { overflow: hidden }` alone is not enough: wheel/touch events that land
+     on the cross-origin calendar iframe chain out to the top-level viewport and
+     scroll the page behind the modal. Pinning the body with position:fixed makes
+     the page physically unscrollable (and fixes the iOS jump-to-top on close). */
+  var scrollY = 0;
+  var locked = false;
+
+  function lockScroll() {
+    if (locked) return;
+    scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+    document.body.style.position = 'fixed';
+    document.body.style.top = (-scrollY) + 'px';
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    document.body.style.width = '100%';
+    document.body.style.overflow = 'hidden';
+    locked = true;
+  }
+
+  function unlockScroll() {
+    if (!locked) return;
+    var html = document.documentElement;
+    var prevBehavior = html.style.scrollBehavior;
+    html.style.scrollBehavior = 'auto';           /* page uses scroll-behavior:smooth */
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.right = '';
+    document.body.style.width = '';
+    document.body.style.overflow = '';
+    window.scrollTo(0, scrollY);
+    html.style.scrollBehavior = prevBehavior;
+    locked = false;
+  }
+
   function showModal() {
+    lockScroll();
     backdrop.classList.add('open');
     requestAnimationFrame(function(){ backdrop.classList.add('show'); });
-    document.body.style.overflow = 'hidden';
   }
 
   window.bkClose = function () {
     backdrop.classList.remove('show');
-    document.body.style.overflow = '';
+    unlockScroll();
     setTimeout(function(){ backdrop.classList.remove('open'); }, 250);
   };
   backdrop.addEventListener('click', function (e) { if (e.target === backdrop) bkClose(); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') bkClose(); });
 
   function renderCalendar() {
-    body.innerHTML = '<iframe src="' + GHL_CALENDAR_URL + '" style="width:100%;border:none;overflow:hidden;" scrolling="no" id="I9FWJYSXvDxaaEj0gqlr_1783482735171"></iframe>';
+    /* The old markup used scrolling="no" + overflow:hidden + min-height:640px and
+       depended on LeadConnector's form_embed.js to resize the frame. It never did
+       (see the message handler below), so the frame stayed 640px tall with its own
+       scrollbar switched off and the bottom of the booking form was unreachable.
+       The frame now carries a plain starting height, is allowed to scroll, and
+       gets its real height from the widget's own message. A fresh id per open
+       avoids reusing a dead frame on the second open. */
+    var frameId = 'I9FWJYSXvDxaaEj0gqlr_' + Date.now();
+    body.innerHTML =
+      '<iframe src="' + GHL_CALENDAR_URL + '" id="' + frameId + '" ' +
+      'title="Book your matching call" ' +
+      'style="width:100%;height:640px;border:none;display:block"></iframe>';
+    body.scrollTop = 0;
     if (!ghlScriptLoaded) {
       var s = document.createElement('script');
       s.src = 'https://api.leadconnectorhq.com/js/form_embed.js';
@@ -1946,6 +2004,31 @@
       ghlScriptLoaded = true;
     }
   }
+
+  /* ── Own the calendar's height handshake ──
+     The LeadConnector widget announces its height with
+       ["highlevel.setHeight", { height: N, id: "msgsndr-calendar" }]
+     Note the id it sends is "msgsndr-calendar", NOT the id of our iframe, which
+     is why their form_embed.js never resized this embed and the frame sat at its
+     starting height forever. We match on the source window instead, so every
+     step of the booking flow (calendar -> times -> details form) gets the height
+     it asks for and the modal body scrolls to reach it. */
+  window.addEventListener('message', function (e) {
+    var host;
+    try { host = new URL(e.origin).hostname; } catch (err) { return; }
+    if (host !== 'api.leadconnectorhq.com' && !/\.leadconnectorhq\.com$/.test(host)) return;
+
+    var d = e.data;
+    if (!Array.isArray(d) || d[0] !== 'highlevel.setHeight' || !d[1]) return;
+
+    var h = parseInt(d[1].height, 10);
+    if (!h || h < 200) return;
+
+    var frame = body.querySelector('iframe');
+    if (!frame || frame.contentWindow !== e.source) return;
+
+    frame.style.height = h + 'px';
+  });
 
   function renderPaywall() {
     body.innerHTML =
