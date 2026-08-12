@@ -108,10 +108,12 @@
       padding: 10px 0;
       overflow: hidden;
       white-space: nowrap;
+      -webkit-mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent);
+      mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent);
     }
     .ticker-track {
       display: inline-flex;
-      animation: ticker 30s linear infinite;
+      animation: ticker 55s linear infinite;
     }
     .ticker:hover .ticker-track { animation-play-state: paused; }
     @keyframes ticker {
@@ -1289,14 +1291,14 @@
     <span class="ticker-item">Vetted independent counselors <span class="ticker-dot"></span></span>
     <span class="ticker-item">Matched to your student's goals <span class="ticker-dot"></span></span>
     <span class="ticker-item">Constellation matching process <span class="ticker-dot"></span></span>
-    <span class="ticker-item">$200 · 30 min–1 hr call <span class="ticker-dot"></span></span>
+    <span class="ticker-item">$200 · 30–60 min call <span class="ticker-dot"></span></span>
     <span class="ticker-item">Liberal arts · STEM · Performing arts specialists <span class="ticker-dot"></span></span>
     <span class="ticker-item">One introduction, not a list <span class="ticker-dot"></span></span>
     <span class="ticker-item">Harvard · Stanford · Princeton counselor network <span class="ticker-dot"></span></span>
     <span class="ticker-item">Vetted independent counselors <span class="ticker-dot"></span></span>
     <span class="ticker-item">Matched to your student's goals <span class="ticker-dot"></span></span>
     <span class="ticker-item">Constellation matching process <span class="ticker-dot"></span></span>
-    <span class="ticker-item">$200 · 30 min–1 hr call <span class="ticker-dot"></span></span>
+    <span class="ticker-item">$200 · 30–60 min call <span class="ticker-dot"></span></span>
     <span class="ticker-item">Liberal arts · STEM · Performing arts specialists <span class="ticker-dot"></span></span>
   </div>
 </div>
@@ -1327,8 +1329,8 @@
             <div class="hero-stat-label">Introduction, not a list</div>
           </div>
           <div>
-            <div class="hero-stat-num" style="font-size:2rem;">30m–1hr</div>
-            <div class="hero-stat-label">Time to get matched</div>
+            <div class="hero-stat-num" style="font-size:2rem;">30–60</div>
+            <div class="hero-stat-label">Minutes to get matched</div>
           </div>
         </div>
       </div>
@@ -1531,7 +1533,7 @@
           <ul class="cc-bio-list">
             <li>Recent Harvard grad; own essay featured in <em>50 Successful Harvard Application Essays</em></li>
             <li>Former senior counselor at two of the country's largest admissions firms before going independent</li>
-            <li>This cycle: students admitted to Harvard, Yale, Wharton, Duke &amp; Harvard Law</li>
+            <li>This cycle: students admitted to Harvard, Yale, Wharton &amp; Duke — plus Harvard Law</li>
             <li>Coached 3 QuestBridge scholars into full four-year scholarships worth $250K+ each</li>
           </ul>
           <div class="cc-tags">
@@ -1557,7 +1559,7 @@
           <div class="cc-role">Independent Educational Consultant</div>
           <ul class="cc-bio-list">
             <li>20+ years inside USC and UCLA — on the committees that decide who gets in</li>
-            <li>Most consultants guess what officers want; spent decades as the person in the room</li>
+            <li>Most consultants guess what officers want — she spent decades as the person in the room</li>
             <li>Points that insider knowledge directly at helping students get admitted</li>
             <li>Known for being deeply responsive and communicative throughout the process</li>
           </ul>
@@ -1692,7 +1694,7 @@
         </details>
         <details data-reveal data-delay="3">
           <summary>How much does the matching call cost?</summary>
-          <div class="faq-ans">The matching call is $200. That's a one-time fee for the 30-minute conversation where we learn about your student and make our recommendation. There are no additional charges from GSG after that.</div>
+          <div class="faq-ans">The matching call is $200. That's a one-time fee for the 30–60 minute conversation where we learn about your student and make our recommendation. There are no additional charges from GSG after that.</div>
         </details>
         <details data-reveal data-delay="4">
           <summary>When should we start?</summary>
@@ -1700,7 +1702,7 @@
         </details>
         <details data-reveal data-delay="5">
           <summary>What happens on the matching call?</summary>
-          <div class="faq-ans">A 30-minute conversation, not a sales call. We ask about your student's goals and timeline, then identify the right counselor and make a direct introduction.</div>
+          <div class="faq-ans">A 30–60 minute conversation, not a sales call. We ask about your student's goals and timeline, then identify the right counselor and make a direct introduction.</div>
         </details>
         <details data-reveal data-delay="6">
           <summary>What if the match isn't right?</summary>
@@ -1822,7 +1824,7 @@
   /* ── Hero stat number count-up ── */
   document.querySelectorAll('.hero-stat-num').forEach(el => {
     const raw = el.textContent.trim();
-    if (/[a-zA-Z]/.test(raw) && raw.length > 4) return; // skip text like "30m–1hr"
+    if (/[a-zA-Z]/.test(raw) && raw.length > 4) return; // skip text like "30–60 min"
     const num = parseInt(raw.replace(/[^0-9]/g, ''), 10);
     if (isNaN(num) || num > 500) return;
     const prefix = raw.match(/^[^0-9]*/)[0];
