@@ -1752,7 +1752,7 @@
       <div style="display:flex;gap:28px;align-items:center;flex-wrap:wrap;">
         <a href="#process" style="font-size:.78rem;color:rgba(255,255,255,.3);font-weight:400;transition:color .15s;" onmouseover="this.style.color='rgba(255,255,255,.7)'" onmouseout="this.style.color='rgba(255,255,255,.3)'">How It Works</a>
         <a href="#faq" style="font-size:.78rem;color:rgba(255,255,255,.3);font-weight:400;transition:color .15s;" onmouseover="this.style.color='rgba(255,255,255,.7)'" onmouseout="this.style.color='rgba(255,255,255,.3)'">FAQ</a>
-        <a href="https://gsg-agency-bookingfunnel.netlify.app" target="_blank" rel="noopener" style="font-size:.78rem;color:rgba(255,255,255,.3);font-weight:400;transition:color .15s;" onmouseover="this.style.color='rgba(255,255,255,.7)'" onmouseout="this.style.color='rgba(255,255,255,.3)'">Apply to be a GSG Counselor</a>
+        <a href="https://gsg-agency-bookingfunnel.netlify.app" target="_blank" rel="noopener" class="bk-direct" style="font-size:.78rem;color:rgba(255,255,255,.3);font-weight:400;transition:color .15s;" onmouseover="this.style.color='rgba(255,255,255,.7)'" onmouseout="this.style.color='rgba(255,255,255,.3)'">Apply to be a GSG Counselor</a>
         <a href="mailto:gallatinstrategygroup@gmail.com" style="font-size:.78rem;color:rgba(255,255,255,.3);font-weight:400;transition:color .15s;" onmouseover="this.style.color='rgba(255,255,255,.7)'" onmouseout="this.style.color='rgba(255,255,255,.3)'">Contact</a>
       </div>
       <p style="font-size:.72rem;color:rgba(255,255,255,.18);">© 2026 Gallatin Strategy Group</p>
@@ -2073,7 +2073,7 @@
 
   /* Intercept every booking / counselor CTA */
   document.querySelectorAll(
-    'a[href*="gsg-agency-bookingfunnel"], a[href*="gsg-family-qualifier"]'
+    'a[href*="gsg-agency-bookingfunnel"]:not(.bk-direct), a[href*="gsg-family-qualifier"]'
   ).forEach(function (a) {
     a.removeAttribute('target');
     a.removeAttribute('onclick'); /* avoid double fbq tracking */
