@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="260" viewBox="0 0 400 260" fill="none">
+  <rect width="400" height="260" rx="14" fill="#FFFFFF"/>
+  <!-- left: essay coach -->
+  <rect x="34" y="40" width="152" height="180" rx="10" fill="#F8F6F1" stroke="#E4E0D8"/>
+  <g stroke="#E4E0D8" stroke-width="2.5" stroke-linecap="round">
+    <line x1="56" y1="80" x2="164" y2="80"/><line x1="56" y1="100" x2="150" y2="100"/>
+    <line x1="56" y1="120" x2="160" y2="120"/><line x1="56" y1="140" x2="130" y2="140"/>
+  </g>
+  <line x1="56" y1="100" x2="118" y2="100" stroke="#C8A96E" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- pen -->
+  <path d="M130 88l14 14-30 30-16 2 2-16z" fill="#141F42"/><path d="M100 128l8 8" stroke="#F8F6F1" stroke-width="2"/>
+  <text x="110" y="196" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="11" font-weight="600" letter-spacing=".08em" fill="#6B7280" text-anchor="middle">ESSAY COACH</text>
+  <!-- right: strategist -->
+  <rect x="214" y="40" width="152" height="180" rx="10" fill="#F8F6F1" stroke="#E4E0D8"/>
+  <!-- board -->
+  <g>
+    <rect x="252" y="72" width="22" height="22" fill="#141F42" opacity=".12"/><rect x="274" y="72" width="22" height="22" fill="#141F42" opacity=".35"/>
+    <rect x="296" y="72" width="22" height="22" fill="#141F42" opacity=".12"/>
+    <rect x="252" y="94" width="22" height="22" fill="#141F42" opacity=".35"/><rect x="274" y="94" width="22" height="22" fill="#141F42" opacity=".12"/>
+    <rect x="296" y="94" width="22" height="22" fill="#141F42" opacity=".35"/>
+    <rect x="252" y="116" width="22" height="22" fill="#141F42" opacity=".12"/><rect x="274" y="116" width="22" height="22" fill="#141F42" opacity=".35"/>
+    <rect x="296" y="116" width="22" height="22" fill="#141F42" opacity=".12"/>
+  </g>
+  <!-- piece + move -->
+  <circle cx="263" cy="127" r="7" fill="#C8A96E"/>
+  <path d="M270 120L302 84" stroke="#C8A96E" stroke-width="2.5" stroke-dasharray="4 4" stroke-linecap="round"/>
+  <path d="M296 80l10-2-2 10z" fill="#C8A96E"/>
+  <text x="290" y="196" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-size="11" font-weight="600" letter-spacing=".08em" fill="#6B7280" text-anchor="middle">STRATEGIST</text>
+</svg>

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="260" viewBox="0 0 400 260" fill="none">
+  <rect width="400" height="260" rx="14" fill="#FFFFFF"/>
+  <line x1="50" y1="130" x2="350" y2="130" stroke="#E4E0D8" stroke-width="3" stroke-linecap="round"/>
+  <line x1="50" y1="130" x2="250" y2="130" stroke="#C8A96E" stroke-width="3" stroke-linecap="round"/>
+  <g font-family="Plus Jakarta Sans, system-ui, sans-serif" text-anchor="middle">
+    <circle cx="50" cy="130" r="16" fill="#141F42"/><text x="50" y="135" font-size="12" font-weight="700" fill="#fff">9</text>
+    <circle cx="150" cy="130" r="16" fill="#141F42"/><text x="150" y="135" font-size="12" font-weight="700" fill="#fff">10</text>
+    <circle cx="250" cy="130" r="16" fill="#141F42"/><text x="250" y="135" font-size="12" font-weight="700" fill="#fff">11</text>
+    <circle cx="350" cy="130" r="16" fill="#FFFFFF" stroke="#141F42" stroke-width="2.5"/><text x="350" y="135" font-size="12" font-weight="700" fill="#141F42">12</text>
+    <g font-size="10.5" font-weight="600" fill="#6B7280" letter-spacing=".06em">
+      <text x="50" y="172">GRADE 9</text><text x="150" y="172">GRADE 10</text><text x="250" y="172">GRADE 11</text><text x="350" y="172">GRADE 12</text>
+    </g>
+    <!-- "start here" markers -->
+    <g font-size="10" font-weight="600" fill="#141F42">
+      <rect x="18" y="66" width="64" height="26" rx="13" fill="#F8F6F1" stroke="#E4E0D8"/><text x="50" y="83">Start here</text>
+      <path d="M50 92v18" stroke="#C8A96E" stroke-width="2"/>
+      <rect x="218" y="66" width="64" height="26" rx="13" fill="#F8F6F1" stroke="#E4E0D8"/><text x="250" y="83">Or here</text>
+      <path d="M250 92v18" stroke="#C8A96E" stroke-width="2"/>
+    </g>
+  </g>
+  <!-- cap -->
+  <path d="M336 205l14-6 14 6-14 6z" fill="#141F42"/><path d="M340 208v8c0 2 4 4 10 4s10-2 10-4v-8" stroke="#141F42" stroke-width="2"/>
+  <path d="M364 205v12" stroke="#C8A96E" stroke-width="2"/><circle cx="364" cy="219" r="2.5" fill="#C8A96E"/>
+</svg>
