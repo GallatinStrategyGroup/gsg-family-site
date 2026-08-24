@@ -100,8 +100,17 @@
       white-space: nowrap;
     }
     .nav-cta:hover { background: #1d4ed8; transform: translateY(-1px); }
-    .nav-cta { transition: opacity .25s, visibility .25s, background .15s, transform .15s; }
-    .nav-cta.is-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    /* Header CTA collapses (width + gap) while a page CTA is on screen, so the links slide over */
+    .nav-cta-wrap {
+      max-width: 320px; overflow: hidden;
+      padding: 4px 0 4px 44px; margin-left: -44px;   /* absorbs the flex gap so links land flush right */
+      opacity: 1;
+      transition: max-width .4s cubic-bezier(.22,1,.36,1), margin-left .4s cubic-bezier(.22,1,.36,1), opacity .25s ease .1s;
+    }
+    .nav-cta-wrap.is-hidden {
+      max-width: 0; margin-left: -88px; opacity: 0; pointer-events: none;
+      transition: max-width .4s cubic-bezier(.22,1,.36,1), margin-left .4s cubic-bezier(.22,1,.36,1), opacity .15s ease;
+    }
 
     /* ── TICKER ── */
     .ticker {
@@ -647,6 +656,7 @@
     @media (max-width: 900px) {
       .wrap { padding: 0 24px; }
       .nav-links li:not(:last-child) { display: none; }
+      .nav-cta-wrap { margin-left: 0; padding-left: 0; }
 
       /* Hero: stack vertically */
       .hero { min-height: auto; }
@@ -948,7 +958,7 @@
       <li><a href="#process">Process</a></li>
       <li><a href="#counselors">Counselors</a></li>
       <li><a href="#faq">FAQ</a></li>
-      <li>
+      <li class="nav-cta-wrap">
         <a href="https://gsg-agency-bookingfunnel.netlify.app" class="nav-cta"
            onclick="fbq('track','InitiateCheckout')">
           Book your matching call
@@ -1473,7 +1483,7 @@
   });
 
   /* ── Nav CTA: hide while a page booking button is on screen ── */
-  const navCta = document.querySelector('.nav-cta');
+  const navCta = document.querySelector('.nav-cta-wrap');
   const pageCtas = document.querySelectorAll('.btn-main, .why-price-cta');
   if (navCta && pageCtas.length) {
     const visible = new Set();
