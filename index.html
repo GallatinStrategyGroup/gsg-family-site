@@ -20,6 +20,8 @@
   </script>
   <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1349548950338730&ev=PageView&noscript=1"/></noscript>
 
+  <link rel="preload" as="image" href="/assets/why-timing.webp"/>
+  <link rel="preload" as="image" href="/assets/why-style.webp"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet"/>
@@ -416,10 +418,11 @@
 
     /* ── WHY ── */
     .why-split {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 80px; align-items: center;
+      display: grid; grid-template-columns: 5fr 7fr;
+      gap: 56px; align-items: center;
     }
-    .why-tabs { margin-top: 48px; display: flex; flex-direction: column; }
+    .why-left h2 { font-size: clamp(2.4rem, 3.6vw, 3.6rem); }
+    .why-tabs { margin-top: 40px; display: flex; flex-direction: column; }
     .why-tab {
       all: unset; cursor: pointer; display: block;
       padding: 24px 0 24px 28px;
@@ -433,7 +436,7 @@
       transition: color .2s;
     }
     .why-tab-text {
-      display: none; margin-top: 10px;
+      display: none; margin-top: 10px; min-height: 5.8rem;
       font-size: 1.1rem; color: var(--muted); line-height: 1.75; max-width: 440px;
     }
     .why-tab:hover .why-tab-title { color: var(--navy-dk); }
@@ -441,7 +444,7 @@
     .why-tab.is-active .why-tab-title { color: var(--navy-dk); }
     .why-tab.is-active .why-tab-text { display: block; }
     .why-right img {
-      display: block; width: 100%; height: auto;
+      display: block; width: 100%; aspect-ratio: 3 / 2; height: auto; object-fit: cover;
       border-radius: 16px; border: 1px solid var(--border);
       box-shadow: 0 24px 60px rgba(20,31,66,.08);
       transition: opacity .25s;
