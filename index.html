@@ -465,14 +465,6 @@
       color: var(--navy-dk); margin-bottom: 4px; letter-spacing: -.02em;
     }
     .why-price-sub { font-size: 1.1rem; color: var(--muted); line-height: 1.75; }
-    .why-price-cta {
-      display: inline-flex; align-items: center; gap: 10px;
-      background: #2563EB; color: var(--white);
-      font-size: 1rem; font-weight: 600;
-      padding: 16px 30px; border-radius: 8px; white-space: nowrap;
-      transition: background .15s, transform .15s;
-    }
-    .why-price-cta:hover { background: #1d4ed8; transform: translateY(-1px); }
 
     /* ── COUNSELORS (new card design) ── */
     .counselors-hdr {
@@ -769,7 +761,6 @@
       .step-row { grid-template-columns: 36px 1fr; gap: 0 16px; }
       .step-detail { grid-column: 2; margin-top: 28px; }
       .why-price { padding: 28px 24px; gap: 20px; }
-      .why-price-cta { width: 100%; justify-content: center; }
       .vetting { padding: 28px 20px; gap: 24px; }
       .faq-layout { grid-template-columns: 1fr; gap: 40px; }
       .faq-heading-col { position: static; }
@@ -1287,10 +1278,6 @@
         <p class="why-price-title">One flat fee for the matching call.</p>
         <p class="why-price-sub">No hidden fees. No commissions. No upsells.</p>
       </div>
-      <a href="https://gsg-agency-bookingfunnel.netlify.app" class="why-price-cta" onclick="fbq('track','InitiateCheckout')">
-        Book your matching call
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </a>
     </div>
 
   </div>
@@ -1487,7 +1474,7 @@
 
   /* ── Nav CTA: hide while a page booking button is on screen ── */
   const navCta = document.querySelector('.nav-cta-wrap');
-  const pageCtas = document.querySelectorAll('.btn-main, .why-price-cta');
+  const pageCtas = document.querySelectorAll('.btn-main');
   if (navCta && pageCtas.length) {
     const visible = new Set();
     const ctaObs = new IntersectionObserver(entries => {
