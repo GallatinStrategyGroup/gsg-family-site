@@ -22,7 +22,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet"/>
 
   <style>
     :root {
@@ -32,7 +32,7 @@
       --crimson: #9B1D2A;
       --gold:    #C8A96E;
       --cream:   #F8F6F1;
-      --muted:   #6B7280;
+      --muted:   #4B5563;
       --border:  #E4E0D8;
       --white:   #FFFFFF;
       --serif:   'Plus Jakarta Sans', system-ui, sans-serif;
@@ -100,6 +100,8 @@
       white-space: nowrap;
     }
     .nav-cta:hover { background: #1d4ed8; transform: translateY(-1px); }
+    .nav-cta { transition: opacity .25s, visibility .25s, background .15s, transform .15s; }
+    .nav-cta.is-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 
     /* ── TICKER ── */
     .ticker {
@@ -179,20 +181,6 @@
       letter-spacing: .02em;
     }
 
-    /* badge pill */
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      border: 1px solid rgba(255,255,255,.15);
-      border-radius: 40px; padding: 7px 16px;
-      margin-bottom: 28px;
-      font-size: .75rem; font-weight: 500;
-      color: rgba(255,255,255,.65);
-    }
-    .hero-badge-dot {
-      width: 6px; height: 6px; border-radius: 50%;
-      background: var(--gold); flex-shrink: 0;
-    }
-
     h1 {
       font-family: var(--serif);
       font-size: clamp(2.8rem, 4vw, 5rem);
@@ -234,12 +222,6 @@
       color: var(--white); line-height: 1; margin-bottom: 6px;
     }
     .hero-stat-label { font-size: .72rem; font-weight: 400; color: rgba(255,255,255,.35); line-height: 1.5; }
-
-    /* ── HERO RIGHT — Video call image ── */
-    .vc-img-wrap {
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-    }
     .vc-img {
       position: absolute;
       inset: 0;
@@ -249,11 +231,6 @@
       display: block;
       z-index: 0;
       border-radius: 0;
-    }
-    .vc-fallback {
-      display: none;
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
     }
 
     /* ── HERO RIGHT — Video call mockup (fallback) ── */
@@ -291,12 +268,6 @@
     .vc-dots { display: flex; gap: 6px; }
     .vc-dot { width: 10px; height: 10px; border-radius: 50%; }
     .vc-title { font-size: .72rem; font-weight: 500; color: rgba(255,255,255,.35); letter-spacing: .04em; }
-    .vc-rec {
-      display: flex; align-items: center; gap: 5px;
-      font-size: .62rem; font-weight: 600; letter-spacing: .06em;
-      color: #f87171; text-transform: uppercase;
-    }
-    .vc-rec-dot { width: 6px; height: 6px; border-radius: 50%; background: #f87171; animation: pulse 2s infinite; }
 
     /* main video grid */
     .vc-grid {
@@ -317,25 +288,6 @@
       z-index: 1;
     }
 
-    /* avatar circle inside tile */
-    .vc-person {
-      display: flex; flex-direction: column; align-items: center; gap: 10px;
-    }
-    .vc-avatar {
-      width: 64px; height: 64px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-family: var(--serif); font-size: 1.4rem; font-weight: 500; color: var(--white);
-    }
-    .vc-person-name {
-      font-size: .7rem; font-weight: 500; color: rgba(255,255,255,.55);
-      letter-spacing: .03em;
-    }
-
-    /* speaking indicator ring */
-    .vc-tile.speaking .vc-avatar {
-      box-shadow: 0 0 0 3px rgba(37,99,235,.8), 0 0 0 6px rgba(37,99,235,.2);
-    }
-
     /* name label overlay */
     .vc-name-tag {
       position: absolute; bottom: 12px; left: 12px;
@@ -345,7 +297,6 @@
       display: flex; align-items: center; gap: 6px;
     }
     .vc-mic-on { color: rgba(255,255,255,.5); }
-    .vc-mic-off { color: #f87171; }
 
     /* live caption bar */
     .vc-caption {
@@ -380,39 +331,9 @@
     }
     .vc-btn svg { flex-shrink: 0; }
 
-    /* process pill */
-    .process-pill {
-      display: inline-flex; align-items: center; gap: 8px;
-      border: 1px solid rgba(255,255,255,.1);
-      border-radius: 40px; padding: 6px 14px; margin-bottom: 12px;
-    }
-    .process-pill-dot { width:5px; height:5px; border-radius:50%; background:#4ade80; animation: pulse 2s infinite; flex-shrink:0; }
-    .process-pill p { font-size: .68rem; font-weight: 500; color: rgba(255,255,255,.5); }
-
-    /* ── DIVIDER ── */
-    .divider { height: 1px; background: var(--border); }
-    .divider-dark { height: 1px; background: rgba(255,255,255,.07); }
-
-    /* ── CREDENTIAL ROW ── */
-    .cred-row {
-      background: var(--navy-dk);
-      padding: 20px 0;
-    }
-    .cred-inner {
-      display: flex; align-items: center; justify-content: center;
-      gap: 48px; flex-wrap: wrap;
-    }
-    .cred-item {
-      font-size: .7rem; font-weight: 500;
-      letter-spacing: .1em; text-transform: uppercase;
-      color: rgba(255,255,255,.35);
-    }
-    .cred-sep { width: 1px; height: 14px; background: rgba(255,255,255,.1); }
-
     /* ── SECTION BASE ── */
     .section { padding: 80px 0; }
     .section-alt { padding: 80px 0; background: var(--cream); }
-    .section-dark { padding: 80px 0; background: var(--navy-dk); }
 
     .eyebrow {
       font-size: .75rem; font-weight: 600; letter-spacing: .13em;
@@ -462,9 +383,9 @@
     .step-detail { padding-top: 6px; }
     .step-detail-label {
       display: block;
-      font-size: .62rem; font-weight: 600;
-      letter-spacing: .14em; text-transform: uppercase;
-      color: var(--muted); opacity: .65;
+      font-size: .75rem; font-weight: 600;
+      letter-spacing: .13em; text-transform: uppercase;
+      color: var(--muted);
       margin-bottom: 18px;
     }
     .step-detail ul {
@@ -482,154 +403,71 @@
     }
     .step-lead { font-weight: 700; color: var(--navy-dk); }
 
-    /* Constellation note */
-    .c-note {
-      margin-top: 48px;
-      padding: 32px 0;
-      border-top: 1px solid var(--border);
-      display: flex; align-items: flex-start; gap: 24px;
-    }
-    .c-note-icon {
-      flex-shrink: 0; width: 36px; height: 36px;
-      background: var(--navy-dk); border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      color: var(--gold); font-size: .9rem; margin-top: 2px;
-    }
-    .c-note h4 {
-      font-family: var(--serif); font-size: 1.2rem;
-      font-weight: 700; color: var(--navy-dk); margin-bottom: 8px;
-    }
-    .c-note p { font-size: 1.05rem; font-weight: 400; color: var(--muted); line-height: 1.7; max-width: 520px; }
-
     /* ── WHY ── */
-    .why-grid {
-      margin-top: 72px;
+    .why-split {
       display: grid; grid-template-columns: 1fr 1fr;
-      gap: 0; border: 1px solid var(--border); border-radius: 12px;
-      overflow: hidden;
+      gap: 80px; align-items: center;
     }
-    .why-cell {
-      padding: 32px 30px;
-      border-right: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      display: flex; flex-direction: column;
+    .why-tabs { margin-top: 48px; display: flex; flex-direction: column; }
+    .why-tab {
+      all: unset; cursor: pointer; display: block;
+      padding: 24px 0 24px 28px;
+      border-left: 2px solid var(--border);
+      transition: border-color .2s;
     }
-    .why-cell:nth-child(2n) { border-right: none; }
-    .why-cell:nth-child(3), .why-cell:nth-child(4) { border-bottom: none; }
-    .why-cell h3 {
-      font-family: var(--serif); font-size: 1.4rem;
-      font-weight: 700; color: var(--navy-dk);
-      margin-bottom: 12px; letter-spacing: -.025em;
+    .why-tab:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+    .why-tab-title {
+      display: block; font-family: var(--serif); font-size: 1.3rem;
+      font-weight: 700; color: rgba(20,31,66,.45); letter-spacing: -.02em; line-height: 1.25;
+      transition: color .2s;
     }
-    .why-cell p { font-size: 1.05rem; font-weight: 400; color: var(--muted); line-height: 1.72; }
+    .why-tab-text {
+      display: none; margin-top: 10px;
+      font-size: 1.1rem; color: var(--muted); line-height: 1.75; max-width: 440px;
+    }
+    .why-tab:hover .why-tab-title { color: var(--navy-dk); }
+    .why-tab.is-active { border-left-color: var(--gold); }
+    .why-tab.is-active .why-tab-title { color: var(--navy-dk); }
+    .why-tab.is-active .why-tab-text { display: block; }
+    .why-right img {
+      display: block; width: 100%; height: auto;
+      border-radius: 16px; border: 1px solid var(--border);
+      box-shadow: 0 24px 60px rgba(20,31,66,.08);
+      transition: opacity .25s;
+    }
+    .why-right img.is-swapping { opacity: 0; }
 
-    /* Icon badge */
-    .why-icon {
-      width: 44px; height: 44px; border-radius: 50%;
-      background: var(--cream); border: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 16px; color: var(--navy-dk); flex-shrink: 0;
-    }
-
-    /* Image placeholder (replace with <img> when ready) */
-    .why-img {
-      margin-top: 20px; border-radius: 10px; overflow: hidden;
-      height: 148px; position: relative; flex-shrink: 0;
-    }
-    .why-img img {
-      width: 100%; height: 100%; object-fit: cover; display: block;
-      border-radius: 12px;
-    }
-    .why-img-placeholder {
-      width: 100%; height: 100%;
-      background: linear-gradient(145deg, #dde1eb 0%, #c8cedc 100%);
-      display: flex; align-items: center; justify-content: center;
-      border-radius: 12px;
-    }
-    .why-img-placeholder span {
-      font-size: .68rem; font-weight: 600; letter-spacing: .1em;
-      text-transform: uppercase; color: rgba(20,31,66,.3);
-    }
-
-    /* School logos */
-    .school-logos {
-      margin-top: 28px;
-      display: grid; grid-template-columns: 1fr 1fr 1fr;
-      gap: 10px 14px;
-    }
-    .school-logo {
-      display: flex; align-items: center; justify-content: center;
-      padding: 10px 8px; border: 1px solid var(--border);
-      border-radius: 8px; background: var(--white);
-      font-size: .78rem; font-weight: 800; letter-spacing: .04em;
-      text-align: center; line-height: 1.1;
-    }
-    .school-logo.harvard  { color: #A51C30; }
-    .school-logo.stanford { color: #8C1515; font-style: italic; }
-    .school-logo.mit      { color: #A31F34; font-size: .72rem; }
-    .school-logo.juilliard{ color: #003865; font-style: italic; font-weight: 700; }
-    .school-logo.risd     { color: #003087; font-size: .68rem; letter-spacing: .06em; }
-    .school-logo.ucla     { color: #2774AE; font-size: .9rem; }
-
-    /* Pricing card */
-    .why-price-card {
-      margin-top: 28px; padding: 20px 22px;
-      border: 1px solid var(--border); border-radius: 10px;
-      background: var(--white);
-      display: flex; align-items: center; gap: 24px;
-    }
-    .why-price-left { flex-shrink: 0; }
-    .why-price-label {
-      font-size: .62rem; font-weight: 700; letter-spacing: .1em;
-      text-transform: uppercase; color: var(--muted); margin-bottom: 6px;
+        /* Pricing line */
+    .why-price {
+      margin-top: 64px;
+      display: flex; align-items: center; gap: 36px; flex-wrap: wrap;
+      padding: 36px 40px;
+      background: var(--white); border: 1px solid var(--border); border-radius: 12px;
     }
     .why-price-amount {
-      font-family: var(--serif); font-size: 2.4rem; font-weight: 700;
-      color: var(--navy-dk); line-height: 1;
+      font-family: var(--serif); font-size: 3rem; font-weight: 700;
+      color: var(--navy-dk); line-height: 1; letter-spacing: -.03em;
     }
-    .why-price-checks { list-style: none; display: flex; flex-direction: column; gap: 7px; }
-    .why-price-checks li {
-      font-size: .82rem; font-weight: 500; color: var(--muted);
-      display: flex; align-items: center; gap: 8px;
+    .why-price-text { flex: 1; min-width: 240px; }
+    .why-price-title {
+      font-family: var(--serif); font-size: 1.2rem; font-weight: 700;
+      color: var(--navy-dk); margin-bottom: 4px; letter-spacing: -.02em;
     }
-    .why-price-checks li::before {
-      content: '✓'; color: var(--gold); font-weight: 700; font-size: .85rem;
+    .why-price-sub { font-size: 1.1rem; color: var(--muted); line-height: 1.75; }
+    .why-price-cta {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: #2563EB; color: var(--white);
+      font-size: 1rem; font-weight: 600;
+      padding: 16px 30px; border-radius: 8px; white-space: nowrap;
+      transition: background .15s, transform .15s;
     }
-
-    /* Vetting strip */
-    .vetting {
-      margin-top: 56px; background: var(--navy-dk);
-      border-radius: 6px; padding: 52px 56px;
-      display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;
-      gap: 40px;
-    }
-    .vetting-hdr { grid-column: 1/-1; }
-    .vetting-hdr p {
-      font-family: var(--serif); font-size: 1.75rem;
-      font-weight: 500; color: var(--white);
-      line-height: 1.3; max-width: 520px;
-      margin-top: 12px;
-    }
-    .v-item h4 {
-      font-size: .8rem; font-weight: 700;
-      letter-spacing: .1em; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 10px;
-    }
-    .v-item p { font-size: 1rem; font-weight: 400; color: rgba(255,255,255,.6); line-height: 1.72; }
+    .why-price-cta:hover { background: #1d4ed8; transform: translateY(-1px); }
 
     /* ── COUNSELORS (new card design) ── */
     .counselors-hdr {
       display: flex; align-items: flex-start; justify-content: space-between;
       gap: 32px; margin-bottom: 48px;
     }
-    .counselors-why-link {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-size: .95rem; font-weight: 600; color: var(--navy-dk);
-      border-bottom: 1.5px solid var(--navy-dk);
-      padding-bottom: 2px; white-space: nowrap; margin-top: 12px;
-      transition: opacity .15s;
-    }
-    .counselors-why-link:hover { opacity: .6; }
     .cc-grid {
       display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
     }
@@ -655,13 +493,6 @@
     .cc-photo-overlay {
       position: absolute; inset: 0;
       background: rgba(0, 0, 0, 0.15);
-    }
-    .cc-badge {
-      position: absolute; top: 14px; left: 14px; z-index: 2;
-      font-size: .62rem; font-weight: 700; letter-spacing: .12em;
-      color: var(--gold); border: 1.5px solid rgba(200,169,110,.5);
-      border-radius: 50px; padding: 4px 10px;
-      background: rgba(0,0,0,.3); backdrop-filter: blur(4px);
     }
     .cc-lock-overlay {
       position: relative; z-index: 2;
@@ -690,13 +521,9 @@
       user-select: none;
     }
     .cc-role {
-      font-size: .68rem; font-weight: 700; letter-spacing: .1em;
+      font-size: .75rem; font-weight: 600; letter-spacing: .13em;
       text-transform: uppercase; color: var(--gold);
       margin-bottom: 14px;
-    }
-    .cc-bio {
-      font-size: .95rem; font-weight: 400; color: var(--muted);
-      line-height: 1.7; margin-bottom: 18px;
     }
     .cc-bio-list {
       list-style: none; padding: 0; margin: 0 0 18px 0;
@@ -711,13 +538,6 @@
       color: var(--gold); font-weight: 700; font-size: 1.1rem;
       line-height: 1.4;
     }
-    .cc-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-    .cc-tag {
-      font-size: .72rem; font-weight: 500; color: var(--navy-dk);
-      border: 1.5px solid var(--border); border-radius: 50px;
-      padding: 4px 12px; letter-spacing: .01em;
-      background: transparent;
-    }
     .cc-footer {
       margin-top: 40px;
       display: flex; flex-direction: column; align-items: center; gap: 16px;
@@ -729,14 +549,6 @@
       transition: opacity .15s;
     }
     .cc-browse-link:hover { opacity: .6; }
-    .cc-disclaimer {
-      display: flex; align-items: center; gap: 7px;
-      font-size: .78rem; font-weight: 400; color: var(--muted);
-      line-height: 1.5;
-    }
-
-    /* legacy card styles kept for backwards compat */
-    .c-note-line { margin-top: 20px; text-align: center; font-size: .78rem; font-weight: 300; color: var(--muted); font-style: italic; }
 
     /* ── FAQ ── */
     .faq-layout {
@@ -746,7 +558,6 @@
       align-items: start;
     }
     .faq-heading-col { position: sticky; top: 100px; }
-    .faq-heading-col h2 { font-size: clamp(3rem, 5vw, 5.5rem); line-height: 1.05; }
     .faq-wrap { }
     details { border-top: 1px solid var(--border); }
     details:last-child { border-bottom: 1px solid var(--border); }
@@ -765,90 +576,12 @@
     details[open] summary { color: var(--navy-dk); }
     .faq-ans { padding: 0 0 28px; font-size: 1.1rem; font-weight: 400; color: var(--muted); line-height: 1.78; }
 
-    /* ── TIMING BLOCK ── */
-    .timing-block {
-      background: #080f1e;
-      border-radius: 14px;
-      padding: 48px 52px;
-    }
-    .timing-intro {
-      font-size: 1.15rem; font-weight: 400;
-      color: rgba(255,255,255,.55); line-height: 1.7;
-      max-width: 680px; margin-bottom: 40px;
-    }
-    .timing-table { display: flex; flex-direction: column; gap: 0; }
-    .timing-row {
-      display: grid; grid-template-columns: 180px 1fr auto;
-      align-items: center; gap: 0 28px;
-      border: 1px solid rgba(255,255,255,.08);
-      border-bottom: none; padding: 18px 20px;
-    }
-    .timing-row:first-of-type { border-radius: 8px 8px 0 0; }
-    .timing-label {
-      font-family: var(--serif); font-size: 1rem; font-weight: 700;
-      color: var(--white); white-space: nowrap;
-    }
-    .timing-bar-wrap {
-      height: 10px; background: rgba(255,255,255,.08);
-      border-radius: 99px; overflow: hidden;
-    }
-    .timing-bar { height: 100%; border-radius: 99px; }
-    .timing-status {
-      font-size: .88rem; font-weight: 500; white-space: nowrap;
-    }
-    .timing-desc {
-      font-size: .92rem; font-style: italic;
-      color: rgba(255,255,255,.35); line-height: 1.65;
-      padding: 14px 20px 20px 220px;
-      border: 1px solid rgba(255,255,255,.08);
-      border-bottom: none;
-    }
-    .timing-desc:last-child,
-    .timing-row:last-of-type { border-bottom: 1px solid rgba(255,255,255,.08); }
-    .timing-desc:last-child { border-radius: 0 0 8px 8px; }
-
-    /* ── COUNSELORS UNLOCK PANEL ── */
-    .counselors-unlock {
-      margin-top: 20px;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      background: var(--cream);
-      padding: 48px 40px;
-      text-align: center;
-    }
-    .unlock-inner { max-width: 520px; margin: 0 auto; }
-    .unlock-lock {
-      width: 52px; height: 52px; border-radius: 50%;
-      background: var(--white); border: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 20px; color: var(--navy);
-    }
-    .unlock-title {
-      font-family: var(--serif); font-size: 1.3rem; font-weight: 700;
-      color: var(--navy-dk); letter-spacing: -.02em; margin-bottom: 12px;
-    }
-    .unlock-body {
-      font-size: 1rem; font-weight: 400; color: var(--muted); line-height: 1.72;
-    }
-
-    /* ── COUNSELORS TOGGLE ── */
-    .counselors-toggle {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: none; border: 1px solid var(--border);
-      border-radius: 40px; padding: 12px 24px;
-      font-family: var(--sans); font-size: .9rem; font-weight: 500;
-      color: var(--navy); cursor: pointer;
-      transition: border-color .15s, color .15s;
-    }
-    .counselors-toggle:hover { border-color: var(--navy); color: var(--navy-dk); }
-
     /* ── FINAL CTA ── */
     .cta-section {
       background: var(--navy-dk); padding: 96px 0 80px;
       text-align: center; position: relative; overflow: hidden;
     }
     .cta-section h2 { max-width: 900px; margin: 0 auto; white-space: nowrap; }
-    .trust-line { margin-top: 18px; font-size: .75rem; font-weight: 400; color: rgba(255,255,255,.25); letter-spacing: .04em; }
 
     /* ── GUARANTEE ── */
     .guarantee-section {
@@ -886,33 +619,21 @@
       margin-bottom: 24px;
     }
     .guarantee-eyebrow {
-      font-size: .65rem; font-weight: 700; letter-spacing: .18em;
-      color: var(--gold); opacity: .85;
+      font-size: .75rem; font-weight: 600; letter-spacing: .13em;
+      color: var(--gold);
       text-transform: uppercase; margin-bottom: 20px;
     }
     .guarantee-heading {
+      font-family: var(--serif);
       font-size: clamp(2rem, 3.5vw, 2.7rem);
       font-weight: 700; line-height: 1.15; letter-spacing: -.03em;
       color: var(--white); margin-bottom: 28px;
     }
-    .guarantee-heading em { font-style: italic; color: var(--gold); }
+    .guarantee-heading em { font-style: normal; font-weight: 300; color: var(--gold); }
     .guarantee-body {
       font-size: 1.1rem; line-height: 1.75; font-weight: 400;
       color: rgba(255,255,255,.6);
-      max-width: 580px; margin: 0 auto 36px;
-    }
-    .btn-guarantee {
-      display: inline-flex; align-items: center; gap: 10px;
-      background: var(--white); color: var(--navy-dk);
-      font-size: .95rem; font-weight: 700;
-      padding: 16px 32px; border-radius: 50px;
-      letter-spacing: .01em;
-      transition: background .2s, transform .2s, box-shadow .2s;
-    }
-    .btn-guarantee:hover {
-      background: var(--cream);
-      transform: translateY(-2px);
-      box-shadow: 0 12px 32px rgba(0,0,0,.25);
+      max-width: 580px; margin: 0 auto;
     }
 
     /* ── FOOTER ── */
@@ -951,12 +672,11 @@
         object-position: center 20%;
       }
 
-      .why-grid { grid-template-columns: 1fr; }
-      .why-cell { border-right: none; }
-      .why-cell:last-child { border-bottom: none; }
-      .why-cell:nth-child(3) { border-bottom: 1px solid var(--border); }
+      .why-split { grid-template-columns: 1fr; gap: 40px; }
+      .why-right { order: -1; }
       .vetting { grid-template-columns: 1fr 1fr; padding: 36px 28px; }
-      .counselors-grid { grid-template-columns: 1fr 1fr; }
+      .counselors-grid, .cc-grid { grid-template-columns: 1fr 1fr; }
+      .cta-section h2 { white-space: normal; }
       .foot-inner { flex-direction: column; }
       .foot-cols { flex-direction: column; gap: 28px; }
       .foot-bottom { flex-direction: column; text-align: center; }
@@ -994,6 +714,7 @@
         line-height: 1.12;
       }
       h1 br { display: none; }
+      h1 { word-spacing: normal; }
 
       .hero-actions {
         flex-direction: column;
@@ -1029,12 +750,14 @@
 
       /* Rest of page */
       .cred-inner { gap: 16px; flex-wrap: wrap; justify-content: center; }
-      .counselors-grid { grid-template-columns: 1fr; }
+      .counselors-grid, .cc-grid { grid-template-columns: 1fr; }
+      .cc-photo { height: 260px; }
       .vetting { grid-template-columns: 1fr; }
       .vetting-hdr { grid-column: 1; }
       .step-row { grid-template-columns: 36px 1fr; gap: 0 16px; }
       .step-detail { grid-column: 2; margin-top: 28px; }
-      .why-cell { padding: 28px 20px; }
+      .why-price { padding: 28px 24px; gap: 20px; }
+      .why-price-cta { width: 100%; justify-content: center; }
       .vetting { padding: 28px 20px; gap: 24px; }
       .faq-layout { grid-template-columns: 1fr; gap: 40px; }
       .faq-heading-col { position: static; }
@@ -1065,14 +788,12 @@
       [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
     }
     html.no-js [data-reveal] { opacity: 1; transform: none; }
-
     /* ── HERO ENTRANCE ── */
-    .hero-badge, .hero-pill, h1, .hero-actions, .hero-stats {
+    .hero-pill, h1, .hero-actions, .hero-stats {
       opacity: 0;
       transform: translateY(20px);
       animation: heroIn .8s cubic-bezier(.22,1,.36,1) forwards;
     }
-    .hero-badge  { animation-delay: .1s; }
     h1           { animation-delay: .22s; }
     .hero-actions{ animation-delay: .38s; }
     .hero-stats  { animation-delay: .52s; }
@@ -1110,25 +831,6 @@
     }
     .btn-main:hover { animation: none; }
 
-    /* ── CARD HOVER LIFTS ── */
-    .c-card {
-      transition: transform .25s cubic-bezier(.22,1,.36,1),
-                  box-shadow .25s cubic-bezier(.22,1,.36,1);
-    }
-    .c-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 48px rgba(20,31,66,.12);
-    }
-    .why-cell {
-      transition: transform .25s cubic-bezier(.22,1,.36,1),
-                  background .2s, box-shadow .25s;
-    }
-    .why-cell:hover {
-      transform: translateY(-3px);
-      background: rgba(54,74,135,.04);
-      box-shadow: 0 8px 28px rgba(20,31,66,.07);
-    }
-
     /* ── FAQ SMOOTH EXPAND ── */
     details .faq-ans {
       overflow: hidden;
@@ -1145,10 +847,8 @@
       transform: translateX(14px);
       transition: opacity .4s ease-out .1s,
                   transform .4s cubic-bezier(.22,1,.36,1) .1s;
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .step-detail { opacity: 1 !important; transform: none !important; transition: none !important; }
-    }
+    }@media (prefers-reduced-motion: reduce){
+      .step-detail { opacity: 1 !important; transform: none !important; transition: none !important; }}
     .step-row.revealed .step-detail {
       opacity: 1; transform: none;
     }
@@ -1161,18 +861,6 @@
       from { opacity: 0; transform: translateY(-16px); }
       to   { opacity: 1; transform: none; }
     }
-
-    /* ── COUNSELORS TOGGLE HOVER ── */
-    .counselors-toggle {
-      transition: border-color .18s, color .18s, transform .18s;
-    }
-    .counselors-toggle:hover { transform: translateY(-2px); }
-
-    /* ── TAG HOVER ── */
-    .tag {
-      transition: background .18s, border-color .18s, transform .18s;
-    }
-    .tag:hover { transform: translateY(-1px); background: var(--navy); color: var(--white); border-color: var(--navy); }
 
     /* Step icon badge */
     .step-icon {
@@ -1232,18 +920,6 @@
       transition: height .1s linear;
       border-radius: 2px;
     }
-
-    /* Why-cell hover lift */
-    .why-cell {
-      transition: background .2s, box-shadow .2s;
-    }
-    .why-cell:hover {
-      background: rgba(54,74,135,.03);
-      box-shadow: inset 0 0 0 1px rgba(54,74,135,.08);
-    }
-
-    /* Card lift already exists; add subtle entrance */
-    .c-card[data-reveal] { transform: translateY(20px); }
   </style>
 </head>
 <body>
@@ -1275,7 +951,7 @@
       <li>
         <a href="https://gsg-agency-bookingfunnel.netlify.app" class="nav-cta"
            onclick="fbq('track','InitiateCheckout')">
-          Book a Meeting
+          Book your matching call
         </a>
       </li>
     </ul>
@@ -1310,7 +986,7 @@
       <!-- LEFT -->
       <div class="hero-left">
         <div class="hero-pill">Expert matching · One call · $200</div>
-        <h1>The smarter way<br/>to find your<br/><em>college counselor.</em></h1>
+        <h1>The smarter way <br/>to find your <br/><em>college counselor.</em></h1>
         <div class="hero-actions">
           <a href="https://gsg-agency-bookingfunnel.netlify.app" class="btn-main"
              onclick="fbq('track','InitiateCheckout')">
@@ -1383,10 +1059,104 @@
 </section>
 
 
+<!-- COUNSELORS -->
+<section class="section" id="counselors" style="background: var(--cream);">
+  <div class="wrap">
+
+    <!-- Section header -->
+    <div class="counselors-hdr" data-reveal>
+      <div>
+        <p class="eyebrow eyebrow-gold" style="margin-bottom:14px;">Experts. Matched to your student.</p>
+        <h2 style="margin:0;">Featured <em>counselors.</em></h2>
+        <p class="body-s" style="margin-top:16px; max-width:460px;">Our independent educational consultants are carefully vetted for expertise, experience, and a deep commitment to student outcomes.</p>
+      </div>
+    </div>
+
+    <!-- Cards -->
+    <div class="cc-grid">
+
+      <div class="cc-card" data-reveal data-delay="1">
+        <div class="cc-photo">
+          <img src="/assets/counselor-jennifer.webp" loading="lazy" decoding="async" alt="Counselor" class="cc-photo-img"/>
+          <div class="cc-photo-overlay"></div>
+          <a href="https://gsg-family-qualifier.netlify.app/" class="cc-lock-overlay" target="_blank" rel="noopener">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <span>View with introduction</span>
+          </a>
+        </div>
+        <div class="cc-info">
+          <div class="cc-accent"></div>
+          <div class="cc-name-bar">Jennifer R.</div>
+          <div class="cc-role">Independent Educational Consultant</div>
+          <ul class="cc-bio-list">
+            <li>Harvard doctorate — plus graduate degrees from Oxford, Cambridge, Stanford &amp; Columbia</li>
+            <li>20+ years helping students worldwide win admission to the most selective universities</li>
+            <li>Featured in The New York Times, The Wall Street Journal, and NBC's Today Show</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cc-card" data-reveal data-delay="2">
+        <div class="cc-photo">
+          <img src="/assets/counselor-michael.webp" loading="lazy" decoding="async" alt="Counselor" class="cc-photo-img"/>
+          <div class="cc-photo-overlay"></div>
+          <a href="https://gsg-family-qualifier.netlify.app/" class="cc-lock-overlay" target="_blank" rel="noopener">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <span>View with introduction</span>
+          </a>
+        </div>
+        <div class="cc-info">
+          <div class="cc-accent"></div>
+          <div class="cc-name-bar">Michael T.</div>
+          <div class="cc-role">Independent Educational Consultant</div>
+          <ul class="cc-bio-list">
+            <li>Recent Harvard grad; own essay featured in <em>50 Successful Harvard Application Essays</em></li>
+            <li>Former senior counselor at two of the country's largest admissions firms before going independent</li>
+            <li>This cycle: students admitted to Harvard, Yale, Wharton &amp; Duke — plus Harvard Law</li>
+            <li>Coached 3 QuestBridge scholars into full four-year scholarships worth $250K+ each</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cc-card" data-reveal data-delay="3">
+        <div class="cc-photo">
+          <img src="/assets/counselor-sarah.webp" loading="lazy" decoding="async" alt="Counselor" class="cc-photo-img"/>
+          <div class="cc-photo-overlay"></div>
+          <a href="https://gsg-family-qualifier.netlify.app/" class="cc-lock-overlay" target="_blank" rel="noopener">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <span>View with introduction</span>
+          </a>
+        </div>
+        <div class="cc-info">
+          <div class="cc-accent"></div>
+          <div class="cc-name-bar">Sarah K.</div>
+          <div class="cc-role">Independent Educational Consultant</div>
+          <ul class="cc-bio-list">
+            <li>20+ years inside USC and UCLA — on the committees that decide who gets in</li>
+            <li>Most consultants guess what officers want — she spent decades as the person in the room</li>
+            <li>Points that insider knowledge directly at helping students get admitted</li>
+            <li>Known for being deeply responsive and communicative throughout the process</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="cc-footer" data-reveal>
+      <a href="https://gsg-family-qualifier.netlify.app/" class="cc-browse-link" onclick="fbq('track','InitiateCheckout')">
+        Browse all counselors
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+
+  </div>
+</section>
+
 <!-- PROCESS -->
 <section class="section" id="process">
   <div class="wrap">
-    <h2 data-reveal data-delay="1">Three steps to the<br/><em>right counselor.</em></h2>
+    <h2 data-reveal data-delay="1">How It Works</h2>
 
     <div class="steps-wrap steps-track" style="margin-top:72px;">
       <div class="steps-thread"><div class="steps-thread-fill" id="stepsThreadFill"></div></div>
@@ -1464,188 +1234,50 @@
       </div>
     </div>
 
-    <div class="c-note" data-reveal data-delay="2">
-      <div class="c-note-icon" aria-hidden="true">✦</div>
-      <div>
-        <h4>What is the Constellation process?</h4>
-        <p>We map each student across school targets, working style, and timeline — then make one considered recommendation. A trusted referral, not a search result.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- COUNSELORS -->
-<section class="section" id="counselors" style="background: var(--cream);">
-  <div class="wrap">
-
-    <!-- Section header -->
-    <div class="counselors-hdr" data-reveal>
-      <div>
-        <p class="eyebrow eyebrow-gold" style="margin-bottom:14px;">Experts. Matched to your student.</p>
-        <h2 style="margin:0;">Featured <em style="font-style:italic; color:var(--gold);">counselors.</em></h2>
-        <p style="margin-top:16px; font-size:1.05rem; color:var(--muted); max-width:460px; line-height:1.65;">Our independent educational consultants are carefully vetted for expertise, experience, and a deep commitment to student outcomes.</p>
-      </div>
-    </div>
-
-    <!-- Cards -->
-    <div class="cc-grid">
-
-      <div class="cc-card" data-reveal data-delay="1">
-        <div class="cc-photo">
-          <img src="/assets/counselor-jennifer.webp" loading="lazy" decoding="async" alt="Counselor" class="cc-photo-img"/>
-          <div class="cc-photo-overlay"></div>
-          <span class="cc-badge">IEC</span>
-          <a href="https://gsg-family-qualifier.netlify.app/" class="cc-lock-overlay" target="_blank" rel="noopener">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-            <span>View with introduction</span>
-          </a>
-        </div>
-        <div class="cc-info">
-          <div class="cc-accent"></div>
-          <div class="cc-name-bar">Jennifer R.</div>
-          <div class="cc-role">Independent Educational Consultant</div>
-          <ul class="cc-bio-list">
-            <li>Harvard doctorate — plus graduate degrees from Oxford, Cambridge, Stanford &amp; Columbia</li>
-            <li>20+ years helping students worldwide win admission to the most selective universities</li>
-            <li>Featured in The New York Times, The Wall Street Journal, and NBC's Today Show</li>
-          </ul>
-          <div class="cc-tags">
-            <span class="cc-tag">Selective Admissions</span>
-            <span class="cc-tag">Academic Strategy</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="cc-card" data-reveal data-delay="2">
-        <div class="cc-photo">
-          <img src="/assets/counselor-michael.webp" loading="lazy" decoding="async" alt="Counselor" class="cc-photo-img"/>
-          <div class="cc-photo-overlay"></div>
-          <span class="cc-badge">IEC</span>
-          <a href="https://gsg-family-qualifier.netlify.app/" class="cc-lock-overlay" target="_blank" rel="noopener">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-            <span>View with introduction</span>
-          </a>
-        </div>
-        <div class="cc-info">
-          <div class="cc-accent"></div>
-          <div class="cc-name-bar">Michael T.</div>
-          <div class="cc-role">Independent Educational Consultant</div>
-          <ul class="cc-bio-list">
-            <li>Recent Harvard grad; own essay featured in <em>50 Successful Harvard Application Essays</em></li>
-            <li>Former senior counselor at two of the country's largest admissions firms before going independent</li>
-            <li>This cycle: students admitted to Harvard, Yale, Wharton &amp; Duke — plus Harvard Law</li>
-            <li>Coached 3 QuestBridge scholars into full four-year scholarships worth $250K+ each</li>
-          </ul>
-          <div class="cc-tags">
-            <span class="cc-tag">Essay Strategy</span>
-            <span class="cc-tag">Ivy Admissions</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="cc-card" data-reveal data-delay="3">
-        <div class="cc-photo">
-          <img src="/assets/counselor-sarah.webp" loading="lazy" decoding="async" alt="Counselor" class="cc-photo-img"/>
-          <div class="cc-photo-overlay"></div>
-          <span class="cc-badge">IEC</span>
-          <a href="https://gsg-family-qualifier.netlify.app/" class="cc-lock-overlay" target="_blank" rel="noopener">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-            <span>View with introduction</span>
-          </a>
-        </div>
-        <div class="cc-info">
-          <div class="cc-accent"></div>
-          <div class="cc-name-bar">Sarah K.</div>
-          <div class="cc-role">Independent Educational Consultant</div>
-          <ul class="cc-bio-list">
-            <li>20+ years inside USC and UCLA — on the committees that decide who gets in</li>
-            <li>Most consultants guess what officers want — she spent decades as the person in the room</li>
-            <li>Points that insider knowledge directly at helping students get admitted</li>
-            <li>Known for being deeply responsive and communicative throughout the process</li>
-          </ul>
-          <div class="cc-tags">
-            <span class="cc-tag">Insider Perspective</span>
-            <span class="cc-tag">Holistic Review</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Footer -->
-    <div class="cc-footer" data-reveal>
-      <a href="https://gsg-family-qualifier.netlify.app/" class="cc-browse-link" onclick="fbq('track','InitiateCheckout')">
-        Browse all counselors
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </a>
-    </div>
-
   </div>
 </section>
 
 <!-- WHY GSG -->
-<section class="section-alt" style="padding: 80px 0 88px;">
+<section class="section-alt" id="why">
   <div class="wrap">
-    <h2 data-reveal data-delay="1">Not all students<br/><em>are the same.</em></h2>
+    <div class="why-split">
 
-    <div class="why-grid" style="margin-top:72px;">
+      <div class="why-left" data-reveal data-delay="1">
+        <p class="eyebrow">Why matching matters</p>
+        <h2>Not all students<br/><em>are the same.</em></h2>
 
-      <div class="why-cell" data-reveal data-delay="1">
-        <div class="why-icon" aria-hidden="true">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-        </div>
-        <h3>Different goals need different expertise</h3>
-        <p>The counselor who gets a student into MIT's engineering program isn't the one who gets them into Berkeley Haas. We match your student with someone who's placed kids on their exact path.</p>
-        <div class="why-img">
-          <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjE0OCIgdmlld0JveD0iMCAwIDYwMCAxNDgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSIxNDgiIGZpbGw9IiNGMEVERTgiLz4KCiAgPCEtLSBTVEVNIGNhcmQgLS0+CiAgPHJlY3QgeD0iMjgiIHk9IjIwIiB3aWR0aD0iMTY0IiBoZWlnaHQ9IjEwOCIgcng9IjgiIGZpbGw9IndoaXRlIiBzdHJva2U9IiNFNEUwRDgiIHN0cm9rZS13aWR0aD0iMSIvPgogIDxjaXJjbGUgY3g9IjExMCIgY3k9IjYyIiByPSI1IiBmaWxsPSIjMUUyRTVDIiBvcGFjaXR5PSIwLjc1Ii8+CiAgPGVsbGlwc2UgY3g9IjExMCIgY3k9IjYyIiByeD0iMjEiIHJ5PSI4IiBzdHJva2U9IiNDOEE5NkUiIHN0cm9rZS13aWR0aD0iMS40Ii8+CiAgPGVsbGlwc2UgY3g9IjExMCIgY3k9IjYyIiByeD0iMjEiIHJ5PSI4IiBzdHJva2U9IiNDOEE5NkUiIHN0cm9rZS13aWR0aD0iMS40IiB0cmFuc2Zvcm09InJvdGF0ZSg2MCAxMTAgNjIpIi8+CiAgPGVsbGlwc2UgY3g9IjExMCIgY3k9IjYyIiByeD0iMjEiIHJ5PSI4IiBzdHJva2U9IiNDOEE5NkUiIHN0cm9rZS13aWR0aD0iMS40IiB0cmFuc2Zvcm09InJvdGF0ZSgxMjAgMTEwIDYyKSIvPgogIDx0ZXh0IHg9IjExMCIgeT0iMTA2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic3lzdGVtLXVpLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iOCIgZm9udC13ZWlnaHQ9IjYwMCIgbGV0dGVyLXNwYWNpbmc9IjIiIGZpbGw9IiM2QjcyODAiPlNURU08L3RleHQ+CgogIDwhLS0gTGliZXJhbCBBcnRzIGNhcmQgLS0+CiAgPHJlY3QgeD0iMjE4IiB5PSIyMCIgd2lkdGg9IjE2NCIgaGVpZ2h0PSIxMDgiIHJ4PSI4IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTRFMEQ4IiBzdHJva2Utd2lkdGg9IjEiLz4KICA8cGF0aCBkPSJNMjY4IDQ2IEMyNjggNDYgMjgzIDQyIDMwMCA0MiBDMzE3IDQyIDMzMiA0NiAzMzIgNDYgTDMzMiA3OCBDMzMyIDc4IDMxNyA3NCAzMDAgNzQgQzI4MyA3NCAyNjggNzggMjY4IDc4IFoiIHN0cm9rZT0iIzFFMkU1QyIgc3Ryb2tlLXdpZHRoPSIxLjIiIG9wYWNpdHk9IjAuNSIvPgogIDxsaW5lIHgxPSIzMDAiIHkxPSI0MiIgeDI9IjMwMCIgeTI9Ijc0IiBzdHJva2U9IiMxRTJFNUMiIHN0cm9rZS13aWR0aD0iMSIgb3BhY2l0eT0iMC40Ii8+CiAgPGxpbmUgeDE9IjI3MiIgeTE9IjU0IiB4Mj0iMjk4IiB5Mj0iNTEiIHN0cm9rZT0iI0M4QTk2RSIgc3Ryb2tlLXdpZHRoPSIxIiBvcGFjaXR5PSIwLjciLz4KICA8bGluZSB4MT0iMjcyIiB5MT0iNjEiIHgyPSIyOTgiIHkyPSI1OCIgc3Ryb2tlPSIjQzhBOTZFIiBzdHJva2Utd2lkdGg9IjEiIG9wYWNpdHk9IjAuNSIvPgogIDxsaW5lIHgxPSIzMDIiIHkxPSI1MSIgeDI9IjMyOCIgeTI9IjU0IiBzdHJva2U9IiNDOEE5NkUiIHN0cm9rZS13aWR0aD0iMSIgb3BhY2l0eT0iMC43Ii8+CiAgPGxpbmUgeDE9IjMwMiIgeTE9IjU4IiB4Mj0iMzI4IiB5Mj0iNjEiIHN0cm9rZT0iI0M4QTk2RSIgc3Ryb2tlLXdpZHRoPSIxIiBvcGFjaXR5PSIwLjUiLz4KICA8dGV4dCB4PSIzMDAiIHk9IjEwNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InN5c3RlbS11aSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjgiIGZvbnQtd2VpZ2h0PSI2MDAiIGxldHRlci1zcGFjaW5nPSIyIiBmaWxsPSIjNkI3MjgwIj5MSUJFUkFMIEFSVFM8L3RleHQ+CgogIDwhLS0gQnVzaW5lc3MgY2FyZCAtLT4KICA8cmVjdCB4PSI0MDgiIHk9IjIwIiB3aWR0aD0iMTY0IiBoZWlnaHQ9IjEwOCIgcng9IjgiIGZpbGw9IndoaXRlIiBzdHJva2U9IiNFNEUwRDgiIHN0cm9rZS13aWR0aD0iMSIvPgogIDwhLS0gQnJpZWZjYXNlIGljb24gLS0+CiAgPHJlY3QgeD0iNDYyIiB5PSI1MiIgd2lkdGg9IjM2IiBoZWlnaHQ9IjI2IiByeD0iMyIgc3Ryb2tlPSIjMUUyRTVDIiBzdHJva2Utd2lkdGg9IjEuMyIgb3BhY2l0eT0iMC41NSIvPgogIDxwYXRoIGQ9Ik00NzIgNTIgTDQ3MiA0NiBRNDcyIDQ0IDQ3NiA0NCBMNDg0IDQ0IFE0ODggNDQgNDg4IDQ2IEw0ODggNTIiIHN0cm9rZT0iIzFFMkU1QyIgc3Ryb2tlLXdpZHRoPSIxLjMiIGZpbGw9Im5vbmUiIG9wYWNpdHk9IjAuNTUiLz4KICA8bGluZSB4MT0iNDYyIiB5MT0iNjIiIHgyPSI0OTgiIHkyPSI2MiIgc3Ryb2tlPSIjMUUyRTVDIiBzdHJva2Utd2lkdGg9IjEiIG9wYWNpdHk9IjAuMjUiLz4KICA8cmVjdCB4PSI0NzciIHk9IjU5IiB3aWR0aD0iNiIgaGVpZ2h0PSI2IiByeD0iMSIgZmlsbD0iI0M4QTk2RSIgb3BhY2l0eT0iMC43NSIvPgogIDx0ZXh0IHg9IjQ5MCIgeT0iMTA2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic3lzdGVtLXVpLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iOCIgZm9udC13ZWlnaHQ9IjYwMCIgbGV0dGVyLXNwYWNpbmc9IjIiIGZpbGw9IiM2QjcyODAiPkJVU0lORVNTPC90ZXh0Pgo8L3N2Zz4=" alt="Student studying" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-          <div class="why-img-placeholder" style="display:none;"><span>Student photo</span></div>
+        <div class="why-tabs" role="tablist" aria-label="Why matching matters">
+          <button class="why-tab is-active" role="tab" aria-selected="true" data-img="/assets/why-goals.svg">
+            <span class="why-tab-title">Different goals need different expertise.</span>
+            <span class="why-tab-text">We match your student with a counselor who has placed students on their exact path.</span>
+          </button>
+          <button class="why-tab" role="tab" aria-selected="false" data-img="/assets/why-timing.svg">
+            <span class="why-tab-title">It's never too early — or too late.</span>
+            <span class="why-tab-text">9th grader or senior, there's a counselor who is great at exactly that stage.</span>
+          </button>
+          <button class="why-tab" role="tab" aria-selected="false" data-img="/assets/why-style.svg">
+            <span class="why-tab-title">Essay help, strategy, or full-cycle support.</span>
+            <span class="why-tab-text">From a single essay review to a counselor who guides every step of every application — we match the right level of help.</span>
+          </button>
         </div>
       </div>
 
-      <div class="why-cell" data-reveal data-delay="2">
-        <div class="why-icon" aria-hidden="true">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        </div>
-        <h3>It's never too early — or too late</h3>
-        <p>Whether your 9th grader is mapping out four years or your junior is just starting, there's a counselor who's great with exactly where they are. We'll match you with them.</p>
-        <div class="why-img">
-          <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjE0OCIgdmlld0JveD0iMCAwIDYwMCAxNDgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSIxNDgiIGZpbGw9IiNGMEVERTgiLz4KCiAgPCEtLSBUaW1lbGluZSB0cmFjayAtLT4KICA8bGluZSB4MT0iNzIiIHkxPSI3MiIgeDI9IjUyOCIgeTI9IjcyIiBzdHJva2U9IiNFNEUwRDgiIHN0cm9rZS13aWR0aD0iMiIvPgogIDwhLS0gR29sZCBwcm9ncmVzcyBsaW5lICh1cCB0byAxMXRoIGdyYWRlIC0gbWlkLWpvdXJuZXkpIC0tPgogIDxsaW5lIHgxPSI3MiIgeTE9IjcyIiB4Mj0iNDAwIiB5Mj0iNzIiIHN0cm9rZT0iI0M4QTk2RSIgc3Ryb2tlLXdpZHRoPSIyIiBvcGFjaXR5PSIwLjYiLz4KCiAgPCEtLSBHcmFkZSBkb3RzIGFuZCBsYWJlbHMgLS0+CiAgPCEtLSA5dGggLS0+CiAgPGNpcmNsZSBjeD0iNzIiIGN5PSI3MiIgcj0iOCIgZmlsbD0iIzFFMkU1QyIgb3BhY2l0eT0iMC44NSIvPgogIDx0ZXh0IHg9IjcyIiB5PSI3NiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InN5c3RlbS11aSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjgiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IndoaXRlIj45PC90ZXh0PgogIDx0ZXh0IHg9IjcyIiB5PSIxMDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzeXN0ZW0tdWksc2Fucy1zZXJpZiIgZm9udC1zaXplPSI4LjUiIGZpbGw9IiM2QjcyODAiPjl0aCBHcmFkZTwvdGV4dD4KCiAgPCEtLSAxMHRoIC0tPgogIDxjaXJjbGUgY3g9IjIxNiIgY3k9IjcyIiByPSI4IiBmaWxsPSIjMUUyRTVDIiBvcGFjaXR5PSIwLjg1Ii8+CiAgPHRleHQgeD0iMjE2IiB5PSI3NiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InN5c3RlbS11aSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjcuNSIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0id2hpdGUiPjEwPC90ZXh0PgogIDx0ZXh0IHg9IjIxNiIgeT0iMTAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic3lzdGVtLXVpLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iOC41IiBmaWxsPSIjNkI3MjgwIj4xMHRoIEdyYWRlPC90ZXh0PgoKICA8IS0tIDExdGggLS0+CiAgPGNpcmNsZSBjeD0iMzYwIiBjeT0iNzIiIHI9IjgiIGZpbGw9IiMxRTJFNUMiIG9wYWNpdHk9IjAuODUiLz4KICA8dGV4dCB4PSIzNjAiIHk9Ijc2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic3lzdGVtLXVpLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iNy41IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSJ3aGl0ZSI+MTE8L3RleHQ+CiAgPHRleHQgeD0iMzYwIiB5PSIxMDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzeXN0ZW0tdWksc2Fucy1zZXJpZiIgZm9udC1zaXplPSI4LjUiIGZpbGw9IiM2QjcyODAiPjExdGggR3JhZGU8L3RleHQ+CgogIDwhLS0gMTJ0aCAtLT4KICA8Y2lyY2xlIGN4PSI1MDQiIGN5PSI3MiIgcj0iOCIgZmlsbD0iIzFFMkU1QyIgb3BhY2l0eT0iMC41IiBzdHJva2U9IiMxRTJFNUMiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtZGFzaGFycmF5PSIzLDIiLz4KICA8dGV4dCB4PSI1MDQiIHk9Ijc2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic3lzdGVtLXVpLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iNy41IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjMUUyRTVDIiBvcGFjaXR5PSIwLjciPjEyPC90ZXh0PgogIDx0ZXh0IHg9IjUwNCIgeT0iMTAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic3lzdGVtLXVpLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iOC41IiBmaWxsPSIjNkI3MjgwIj4xMnRoIEdyYWRlPC90ZXh0PgoKICA8IS0tIEdyYWR1YXRpb24gY2FwIGF0IGVuZCAtLT4KICA8cmVjdCB4PSI1MTQiIHk9IjM4IiB3aWR0aD0iMjIiIGhlaWdodD0iMTQiIHJ4PSIyIiBmaWxsPSIjMUUyRTVDIiBvcGFjaXR5PSIwLjMiLz4KICA8bGluZSB4MT0iNTE4IiB5MT0iMzgiIHgyPSI1NDIiIHkyPSIzOCIgc3Ryb2tlPSIjMUUyRTVDIiBzdHJva2Utd2lkdGg9IjIiIG9wYWNpdHk9IjAuMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPGxpbmUgeDE9IjUzMCIgeTE9IjM4IiB4Mj0iNTMwIiB5Mj0iMzAiIHN0cm9rZT0iI0M4QTk2RSIgc3Ryb2tlLXdpZHRoPSIxLjUiIG9wYWNpdHk9IjAuNyIvPgogIDxjaXJjbGUgY3g9IjUzMCIgY3k9IjI5IiByPSIyIiBmaWxsPSIjQzhBOTZFIiBvcGFjaXR5PSIwLjciLz4KCiAgPCEtLSAiU3RhcnQgYW55dGltZSIgbm90ZSAtLT4KICA8cmVjdCB4PSIyMDgiIHk9IjExMCIgd2lkdGg9IjE4NCIgaGVpZ2h0PSIyMiIgcng9IjQiIGZpbGw9IndoaXRlIiBzdHJva2U9IiNFNEUwRDgiLz4KICA8dGV4dCB4PSIzMDAiIHk9IjEyNSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9InN5c3RlbS11aSxzYW5zLXNlcmlmIiBmb250LXNpemU9IjguNSIgZmlsbD0iIzZCNzI4MCIgbGV0dGVyLXNwYWNpbmc9IjAuNSI+U3RhcnQgd2hlcmV2ZXIgeW91IGFyZTwvdGV4dD4KPC9zdmc+" alt="College planning notebook" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-          <div class="why-img-placeholder" style="display:none;"><span>Planning photo</span></div>
-        </div>
+      <div class="why-right" data-reveal data-delay="2">
+        <img id="whyImg" src="/assets/why-goals.svg" alt="A student's path branching toward engineering, business, and liberal arts targets"/>
       </div>
 
-      <div class="why-cell" data-reveal data-delay="3">
-        <div class="why-icon" aria-hidden="true">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        </div>
-        <h3>Some want an essay coach. Some want a strategist.</h3>
-        <p>Some students need hands-on help polishing applications and essays. Others want one sharp voice for the big calls — school list, positioning, timing. We match your student to the right kind of help.</p>
-        <div class="why-img">
-          <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjE0OCIgdmlld0JveD0iMCAwIDYwMCAxNDgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHJlY3Qgd2lkdGg9IjYwMCIgaGVpZ2h0PSIxNDgiIGZpbGw9IiNGMEVERTgiLz4KCiAgPCEtLSBMZWZ0IHBhbmVsOiBFc3NheSBDb2FjaCAtLT4KICA8cmVjdCB4PSIyMCIgeT0iMTYiIHdpZHRoPSIyNTgiIGhlaWdodD0iMTE2IiByeD0iOCIgZmlsbD0id2hpdGUiIHN0cm9rZT0iI0U0RTBEOCIvPgogIDwhLS0gUGVuIC8gd3JpdGluZyBpY29uIC0tPgogIDxwYXRoIGQ9Ik0yNjAgNTAgTDI0OCA2MiBMMjQ2IDcyIEwyNTYgNzAgTDI2OCA1OCBaIiBzdHJva2U9IiMxRTJFNUMiIHN0cm9rZS13aWR0aD0iMS4zIiBmaWxsPSJub25lIiBvcGFjaXR5PSIwLjYiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xNjAgMCkiLz4KICA8cGF0aCBkPSJNMjU4IDUyIEwyNjYgNjAiIHN0cm9rZT0iI0M4QTk2RSIgc3Ryb2tlLXdpZHRoPSIxLjIiIG9wYWNpdHk9IjAuOCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTE2MCAwKSIvPgogIDwhLS0gV3JpdGluZyBsaW5lcyAtLT4KICA8bGluZSB4MT0iNjgiIHkxPSI3MiIgeDI9IjIzMCIgeTI9IjcyIiBzdHJva2U9IiNFNEUwRDgiIHN0cm9rZS13aWR0aD0iMSIvPgogIDxsaW5lIHgxPSI2OCIgeTE9IjgwIiB4Mj0iMjEwIiB5Mj0iODAiIHN0cm9rZT0iI0U0RTBEOCIgc3Ryb2tlLXdpZHRoPSIxIi8+CiAgPGxpbmUgeDE9IjY4IiB5MT0iODgiIHgyPSIyMjAiIHkyPSI4OCIgc3Ryb2tlPSIjQzhBOTZFIiBzdHJva2Utd2lkdGg9IjEiIG9wYWNpdHk9IjAuNSIvPgogIDxsaW5lIHgxPSI2OCIgeTE9Ijk2IiB4Mj0iMTkwIiB5Mj0iOTYiIHN0cm9rZT0iI0U0RTBEOCIgc3Ryb2tlLXdpZHRoPSIxIi8+CiAgPCEtLSBQZW4gbmliIGRyYXduIHdpdGggcGF0aHMgLS0+CiAgPHBhdGggZD0iTTEwOCA0MiBMMTAwIDYyIEwxMTYgNjIgWiIgc3Ryb2tlPSIjMUUyRTVDIiBzdHJva2Utd2lkdGg9IjEuMyIgZmlsbD0ibm9uZSIgb3BhY2l0eT0iMC41Ii8+CiAgPGxpbmUgeDE9IjEwOCIgeTE9IjM4IiB4Mj0iMTA4IiB5Mj0iNDMiIHN0cm9rZT0iIzFFMkU1QyIgc3Ryb2tlLXdpZHRoPSIyIiBvcGFjaXR5PSIwLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDx0ZXh0IHg9IjE0OSIgeT0iMTE4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic3lzdGVtLXVpLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iOCIgZm9udC13ZWlnaHQ9IjYwMCIgbGV0dGVyLXNwYWNpbmc9IjEuNSIgZmlsbD0iIzZCNzI4MCI+RVNTQVkgQ09BQ0g8L3RleHQ+CgogIDwhLS0gRGl2aWRlciAtLT4KICA8bGluZSB4MT0iMzAwIiB5MT0iMjAiIHgyPSIzMDAiIHkyPSIxMjgiIHN0cm9rZT0iI0U0RTBEOCIgc3Ryb2tlLXdpZHRoPSIxIi8+CgogIDwhLS0gUmlnaHQgcGFuZWw6IFN0cmF0ZWdpc3QgLS0+CiAgPHJlY3QgeD0iMzIyIiB5PSIxNiIgd2lkdGg9IjI1OCIgaGVpZ2h0PSIxMTYiIHJ4PSI4IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjRTRFMEQ4Ii8+CiAgPCEtLSBDaGVzcyBxdWVlbiAvIHN0cmF0ZWd5IGljb24gLS0+CiAgPCEtLSBTaW1wbGlmaWVkIGNoZXNzYm9hcmQgMngyIC0tPgogIDxyZWN0IHg9IjQwMCIgeT0iNDQiIHdpZHRoPSIxNCIgaGVpZ2h0PSIxNCIgZmlsbD0iIzFFMkU1QyIgb3BhY2l0eT0iMC4xNSIvPgogIDxyZWN0IHg9IjQxNCIgeT0iNDQiIHdpZHRoPSIxNCIgaGVpZ2h0PSIxNCIgZmlsbD0iIzFFMkU1QyIgb3BhY2l0eT0iMC40Ii8+CiAgPHJlY3QgeD0iNDAwIiB5PSI1OCIgd2lkdGg9IjE0IiBoZWlnaHQ9IjE0IiBmaWxsPSIjMUUyRTVDIiBvcGFjaXR5PSIwLjQiLz4KICA8cmVjdCB4PSI0MTQiIHk9IjU4IiB3aWR0aD0iMTQiIGhlaWdodD0iMTQiIGZpbGw9IiMxRTJFNUMiIG9wYWNpdHk9IjAuMTUiLz4KICA8IS0tIENoZXNzIHBpZWNlIChxdWVlbikgb24gdG9wIHJpZ2h0IHNxdWFyZSAtLT4KICA8ZWxsaXBzZSBjeD0iNDIxIiBjeT0iNDciIHJ4PSI0IiByeT0iMi41IiBmaWxsPSIjQzhBOTZFIiBvcGFjaXR5PSIwLjkiLz4KICA8bGluZSB4MT0iNDIxIiB5MT0iNDQiIHgyPSI0MjEiIHkyPSI1MSIgc3Ryb2tlPSIjQzhBOTZFIiBzdHJva2Utd2lkdGg9IjEuNSIgb3BhY2l0eT0iMC44Ii8+CiAgPGVsbGlwc2UgY3g9IjQyMSIgY3k9IjUyIiByeD0iNSIgcnk9IjIiIGZpbGw9IiNDOEE5NkUiIG9wYWNpdHk9IjAuNyIvPgogIDwhLS0gTW92ZSBhcnJvdyAtLT4KICA8cGF0aCBkPSJNNDM1IDUxIEw0NTAgNDQiIHN0cm9rZT0iIzFFMkU1QyIgc3Ryb2tlLXdpZHRoPSIxLjIiIG9wYWNpdHk9IjAuNCIgc3Ryb2tlLWRhc2hhcnJheT0iMywyIi8+CiAgPHBvbHlnb24gcG9pbnRzPSI0NTAsNDAgNDU1LDQ2IDQ0OSw0NyIgZmlsbD0iIzFFMkU1QyIgb3BhY2l0eT0iMC40Ii8+CiAgPHRleHQgeD0iNDUxIiB5PSIxMTgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtZmFtaWx5PSJzeXN0ZW0tdWksc2Fucy1zZXJpZiIgZm9udC1zaXplPSI4IiBmb250LXdlaWdodD0iNjAwIiBsZXR0ZXItc3BhY2luZz0iMS41IiBmaWxsPSIjNkI3MjgwIj5TVFJBVEVHSVNUPC90ZXh0Pgo8L3N2Zz4=" alt="Family working together" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-          <div class="why-img-placeholder" style="display:none;"><span>Family call photo</span></div>
-        </div>
-      </div>
+    </div>
 
-      <div class="why-cell" data-reveal data-delay="4">
-        <div class="why-icon" aria-hidden="true">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
-        </div>
-        <h3>Transparent pricing</h3>
-        <p>One flat $200 call to get matched. No hidden fees, no commissions, no upsells.</p>
-        <div class="why-price-card">
-          <div class="why-price-left">
-            <div class="why-price-label">Matching Call</div>
-            <div class="why-price-amount">$200</div>
-          </div>
-          <ul class="why-price-checks">
-            <li>One conversation</li>
-            <li>No hidden fees</li>
-            <li>No commissions</li>
-            <li>No upsells</li>
-          </ul>
-        </div>
+    <div class="why-price" data-reveal data-delay="2">
+      <div class="why-price-amount">$200</div>
+      <div class="why-price-text">
+        <p class="why-price-title">One flat fee for the matching call.</p>
+        <p class="why-price-sub">No hidden fees. No commissions. No upsells.</p>
       </div>
-
+      <a href="https://gsg-agency-bookingfunnel.netlify.app" class="why-price-cta" onclick="fbq('track','InitiateCheckout')">
+        Book your matching call
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
     </div>
 
   </div>
@@ -1664,11 +1296,7 @@
     </div>
     <p class="guarantee-eyebrow">OUR PROMISE</p>
     <h2 class="guarantee-heading">If we can't identify counselor matches for your student,<br/><em>the call is on us.</em></h2>
-    <p class="guarantee-body">A real conversation about your student — not a sales pitch. In the rare case we can't identify a counselor match for your student, we'll refund your call fee. No forms, no hassle.</p>
-    <a href="https://gsg-agency-bookingfunnel.netlify.app" class="btn-guarantee" onclick="fbq('track','InitiateCheckout')">
-      Book your matching call
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-    </a>
+    <p class="guarantee-body">A real conversation about your student. In the rare case we can't identify a counselor match for your student, we'll refund your call fee. No forms, no hassle.</p>
   </div>
 </section>
 
@@ -1844,10 +1472,28 @@
     obs.observe(el);
   });
 
-  /* ── Why-cell stagger on entry ── */
-  document.querySelectorAll('.why-cell').forEach((el, i) => {
-    el.style.transitionDelay = (i * 0.08) + 's';
-  });
+  /* ── Nav CTA: hide while a page booking button is on screen ── */
+  const navCta = document.querySelector('.nav-cta');
+  const pageCtas = document.querySelectorAll('.btn-main, .why-price-cta');
+  if (navCta && pageCtas.length) {
+    const visible = new Set();
+    const ctaObs = new IntersectionObserver(entries => {
+      entries.forEach(e => e.isIntersecting ? visible.add(e.target) : visible.delete(e.target));
+      navCta.classList.toggle('is-hidden', visible.size > 0);
+    }, { threshold: 0 });
+    pageCtas.forEach(el => ctaObs.observe(el));
+  }
+
+  /* ── Why tabs ── */
+  const whyImg = document.getElementById('whyImg');
+  const whyTabs = document.querySelectorAll('.why-tab');
+  whyTabs.forEach(tab => tab.addEventListener('click', () => {
+    if (tab.classList.contains('is-active')) return;
+    whyTabs.forEach(t => { t.classList.remove('is-active'); t.setAttribute('aria-selected','false'); });
+    tab.classList.add('is-active'); tab.setAttribute('aria-selected','true');
+    whyImg.classList.add('is-swapping');
+    setTimeout(() => { whyImg.src = tab.dataset.img; whyImg.alt = tab.querySelector('.why-tab-title').textContent; whyImg.classList.remove('is-swapping'); }, 250);
+  }));
 
   /* ── Counselor card stagger ── */
   document.querySelectorAll('.c-card').forEach((el, i) => {
